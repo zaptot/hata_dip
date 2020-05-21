@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="h-100">
   <head>
     <title>Hata</title>
     <%= csrf_meta_tags %>
@@ -9,8 +9,8 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+  <body class="d-flex flex-column h-100">
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 bg-white border-bottom shadow-sm">
       <%= link_to('HATA.BY', root_path, class: 'my-0 mr-md-auto font-weight-normal') %>
       <nav class="my-2 my-md-0 mr-md-3">
         <a class="p-2 text-dark" href="#">FAQ</a>
@@ -22,6 +22,7 @@
           <button id="btnGroupDrop1" type="button" class="btn btn-primary rounded-circle profile_icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1" style="">
             <%= link_to('Profile', profile_path, class: 'dropdown-item') %>
+            <%= link_to('My posts', my_posts_url, class: 'dropdown-item') %>
             <%= link_to('Sign out', destroy_user_session_path, class: 'dropdown-item', method: :delete) %>
           </div>
         </div>
@@ -31,6 +32,14 @@
       <% end %>
     </div>
 
-    <%= yield %>
+    <main role="main" class="flex-shrink-0">
+      <%= yield %>
+    </main>
+
+    <footer class="footer mt-auto py-3">
+      <div class="container">
+        <span class="text-muted">Place sticky footer content here.</span>
+      </div>
+    </footer>
   </body>
 </html>

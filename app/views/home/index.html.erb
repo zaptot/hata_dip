@@ -1,0 +1,10 @@
+<div class="album py-5 bg-light">
+  <div class="container">
+    <h1>Homes</h1>
+    <div class="row">
+      <% @homes.each do |home| %>
+        <%= link_to render(partial: 'home/card', locals: { home: home }), home, class: 'col-md-4' %>
+      <% end %>
+    </div>
+  </div>
+</div>

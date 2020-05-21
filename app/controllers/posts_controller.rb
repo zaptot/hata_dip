@@ -1,5 +1,8 @@
 class PostsController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :build_form, only: [:new, :edit]
   before_action :authenticate_user!, only: [:create]
   # GET /posts
   # GET /posts.json
@@ -24,15 +27,15 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(post_params)
+    @post_form = PostForm.new(params.require(:post_form).permit(*(PostForm::HOUSE_FIELDS + PostForm::POST_FIELDS)))
 
     respond_to do |format|
-      if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
-        format.json { render :show, status: :created, location: @post }
+      if @post_form.save
+        format.html { redirect_to @post_form, notice: 'Post was successfully created.' }
+        format.json { render :show, status: :created, location: @post_form }
       else
         format.html { render :new }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+        format.json { render json: @post_form.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -51,6 +54,11 @@ class PostsController < ApplicationController
     end
   end
 
+  def my_posts
+    @posts = Post.where(user: current_user)
+    render 'index'
+  end
+
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
@@ -62,13 +70,18 @@ class PostsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = Post.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def post_params
-      params.require(:post).permit(:title, :description, :views)
-    end
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
+  def build_form
+    @post_form = PostForm.new
+  end
+
+  def post_params
+    params.require(:post)
+          .permit(*POST_FIELDS)
+          .merge(user: current_user)
+  end
 end

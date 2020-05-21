@@ -1,10 +1,10 @@
-<%= form_with(model: post, local: true) do |form| %>
-  <% if post.errors.any? %>
+<%= form_for(@post_form, url: '/posts', method: :post, validate: true) do |form| %>
+  <% if @post_form.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+      <h2><%= pluralize(@post_form.errors.count, "error") %> prohibited this post from being saved:</h2>
 
       <ul>
-        <% post.errors.full_messages.each do |message| %>
+        <% @post_form.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>
@@ -19,6 +19,76 @@
   <div class="field">
     <%= form.label :description %>
     <%= form.text_field :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :city %>
+    <%= form.text_field :city %>
+  </div>
+
+  <div class="field">
+    <%= form.label :street %>
+    <%= form.text_field :street %>
+  </div>
+
+  <div class="field">
+    <%= form.label :house_number %>
+    <%= form.text_field :house_number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :index_number %>
+    <%= form.text_field :index_number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :floor %>
+    <%= form.text_field :floor %>
+  </div>
+
+  <div class="field">
+    <%= form.label :rooms_count %>
+    <%= form.text_field :rooms_count %>
+  </div>
+
+  <div class="field">
+    <%= form.label :space %>
+    <%= form.text_field :space %>
+  </div>
+
+  <div class="field">
+    <%= form.label :build_year %>
+    <%= form.text_field :build_year %>
+  </div>
+
+  <div class="field">
+    <%= form.label :furniture %>
+    <%= form.check_box :furniture %>
+  </div>
+
+  <div class="field">
+    <%= form.label :fridge %>
+    <%= form.check_box :fridge %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tv %>
+    <%= form.check_box :tv %>
+  </div>
+
+  <div class="field">
+    <%= form.label :internet %>
+    <%= form.check_box :internet %>
+  </div>
+
+  <div class="field">
+    <%= form.label :balcony %>
+    <%= form.check_box :balcony %>
+  </div>
+
+  <div class="field">
+    <%= form.label :conditioner %>
+    <%= form.check_box :conditioner %>
   </div>
 
   <div class="actions">

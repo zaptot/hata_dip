@@ -10,17 +10,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_22_174734) do
+ActiveRecord::Schema.define(version: 2020_05_19_231105) do
 
-  create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "homes", force: :cascade do |t|
+    t.string "city", null: false
+    t.string "street", null: false
+    t.string "house_number", null: false
+    t.string "index_number"
+    t.string "floor"
+    t.string "rooms_count"
+    t.string "space"
+    t.date "build_year"
+    t.boolean "furniture", default: false
+    t.boolean "fridge", default: false
+    t.boolean "tv", default: false
+    t.boolean "internet", default: false
+    t.boolean "balcony", default: false
+    t.boolean "conditioner", default: false
+    t.bigint "user_id", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "posts", force: :cascade do |t|
     t.string "title"
     t.string "description"
     t.integer "views"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id", null: false
+    t.bigint "home_id"
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
