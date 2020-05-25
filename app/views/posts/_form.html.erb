@@ -21,74 +21,114 @@
     <%= form.text_field :description %>
   </div>
 
-  <div class="field">
-    <%= form.label :city %>
-    <%= form.text_field :city %>
-  </div>
+  <div class="accordion" id="accordionExample">
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h5 class="mb-0">
+          <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Select home from list
+          </button>
+        </h5>
+      </div>
 
-  <div class="field">
-    <%= form.label :street %>
-    <%= form.text_field :street %>
-  </div>
+      <div id="collapseOne" class="collapse <%= current_user.homes.any? ? 'show' : '' %>" aria-labelledby="headingOne" data-parent="#accordionExample">
+        <div class="card-body">
+          <% current_user.homes.each do |home| %>
+            <div class="field">
+              <%= form.label home.id %>
+              <%= form.radio_button :home_id, home.id %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingTwo">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            Add new home
+          </button>
+        </h5>
+      </div>
+      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+        <div class="card-body">
+          <div class="field">
+            <%= form.label :city %>
+            <%= form.text_field :city %>
+          </div>
 
-  <div class="field">
-    <%= form.label :house_number %>
-    <%= form.text_field :house_number %>
-  </div>
+          <div class="field">
+            <%= form.label :street %>
+            <%= form.text_field :street %>
+          </div>
 
-  <div class="field">
-    <%= form.label :index_number %>
-    <%= form.text_field :index_number %>
-  </div>
+          <div class="field">
+            <%= form.label :house_number %>
+            <%= form.text_field :house_number %>
+          </div>
 
-  <div class="field">
-    <%= form.label :floor %>
-    <%= form.text_field :floor %>
-  </div>
+          <div class="field">
+            <%= form.label :index_number %>
+            <%= form.text_field :index_number %>
+          </div>
 
-  <div class="field">
-    <%= form.label :rooms_count %>
-    <%= form.text_field :rooms_count %>
-  </div>
+          <div class="field">
+            <%= form.label :floor %>
+            <%= form.text_field :floor %>
+          </div>
 
-  <div class="field">
-    <%= form.label :space %>
-    <%= form.text_field :space %>
-  </div>
+          <div class="field">
+            <%= form.label :rooms_count %>
+            <%= form.text_field :rooms_count %>
+          </div>
 
-  <div class="field">
-    <%= form.label :build_year %>
-    <%= form.text_field :build_year %>
-  </div>
+          <div class="field">
+            <%= form.label :space %>
+            <%= form.text_field :space %>
+          </div>
 
-  <div class="field">
-    <%= form.label :furniture %>
-    <%= form.check_box :furniture %>
-  </div>
+          <div class="field">
+            <%= form.label :build_year %>
+            <%= form.text_field :build_year %>
+          </div>
 
-  <div class="field">
-    <%= form.label :fridge %>
-    <%= form.check_box :fridge %>
-  </div>
+          <div class="field">
+            <%= form.label :furniture %>
+            <%= form.check_box :furniture %>
+          </div>
 
-  <div class="field">
-    <%= form.label :tv %>
-    <%= form.check_box :tv %>
-  </div>
+          <div class="field">
+            <%= form.label :fridge %>
+            <%= form.check_box :fridge %>
+          </div>
 
-  <div class="field">
-    <%= form.label :internet %>
-    <%= form.check_box :internet %>
-  </div>
+          <div class="field">
+            <%= form.label :tv %>
+            <%= form.check_box :tv %>
+          </div>
 
-  <div class="field">
-    <%= form.label :balcony %>
-    <%= form.check_box :balcony %>
-  </div>
+          <div class="field">
+            <%= form.label :internet %>
+            <%= form.check_box :internet %>
+          </div>
 
-  <div class="field">
-    <%= form.label :conditioner %>
-    <%= form.check_box :conditioner %>
+          <div class="field">
+            <%= form.label :balcony %>
+            <%= form.check_box :balcony %>
+          </div>
+
+          <div class="field">
+            <%= form.label :conditioner %>
+            <%= form.check_box :conditioner %>
+          </div>
+
+          <div>
+            <%= form.label :conditioner %>
+            <%= form.file_field :avatar %>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="actions">

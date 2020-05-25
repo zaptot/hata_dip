@@ -4,6 +4,7 @@
 #
 #  id          :bigint           not null, primary key
 #  description :string
+#  status      :string           default("active"), not null
 #  title       :string
 #  views       :integer
 #  created_at  :datetime         not null

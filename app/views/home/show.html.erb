@@ -1,1 +1,9 @@
+<h2>Home <%= @home.id %></h2>
+
 <%= render partial: 'home', home: @home, locals: { home: @home } %>
+
+<% if @home.posts.active.any? %>
+  <% @home.posts.active.each do |post| %>
+    <%= link_to 'post', post_path(post) %>
+  <% end %>
+<% end %>

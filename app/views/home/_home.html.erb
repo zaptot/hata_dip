@@ -1,17 +1,20 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-8 offset-md-2">
-      <h2>Home <%= home.id %></h2>
-      <% HomeController::PERMITED_PARAMS.each do |field| %>
-        <div class="mb-3 row">
-          <label for="<%= field %>" class="col-form-label col-sm-2">
-            <%= field.capitalize %>
-          </label>
-          <div class="col-sm-10">
-            <input type="<%= field %>" class="form-control" id="<%= field %>" placeholder="<%= home.try(field) %>" disabled>
-          </div>
-        </div>
-      <% end %>
+    <div class="col-md-10 offset-md-1">
+      <table class="table">
+        <tbody>
+        <% HomeController::PERMITED_PARAMS.each do |field| %>
+          <tr>
+            <td>
+              <%= field.capitalize %>
+            </td>
+            <td>
+              <%= home.try(field) %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

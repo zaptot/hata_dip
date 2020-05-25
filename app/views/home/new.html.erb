@@ -1,6 +1,6 @@
 <h1>New Home</h1>
 
-<%= form_for(@home, method: :post, validate: true) do |form| %>
+<%= form_for(@home, url: '/home', method: :post, validate: true) do |form| %>
   <%= render partial: 'form', home: @home, locals: { form: form } %>
 <% end %>
 

@@ -1,10 +1,20 @@
-<div class="album py-5 bg-light">
-  <div class="container">
+<div class="main-max-width">
+  <div style="padding: 20px 0 10px 20px;" class="border-bottom">
     <h1>Posts</h1>
-    <div class="row">
-      <% @posts.each do |post| %>
-        <%= link_to render(partial: 'posts/card', locals: { post: post }), post, class: 'col-md-4' %>
-      <% end %>
+  </div>
+  <div class="main-posts-page">
+    <div class="filter-main">
+      asfdasdf
+    </div>
+
+    <div class="main-slider border-left">
+      <div class="container">
+        <div class="row">
+          <% @posts.each do |post| %>
+            <%= link_to render(partial: 'posts/card', locals: { post: post }), post, class: 'col-md-4' %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>

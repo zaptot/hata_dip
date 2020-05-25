@@ -12,8 +12,13 @@
   <body class="d-flex flex-column h-100">
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 bg-white border-bottom shadow-sm">
       <%= link_to('HATA.BY', root_path, class: 'my-0 mr-md-auto font-weight-normal') %>
+
       <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-dark" href="#">FAQ</a>
+        <a class="p-2 text-dark" href="/posts">posts</a>
+      </nav>
+
+      <nav class="my-2 my-md-0 mr-md-3">
+        <a class="p-2 text-dark" href="/home">homes</a>
       </nav>
 
       <%= link_to('Sell house', new_post_path, class: 'btn btn-outline-primary')%>
@@ -23,6 +28,7 @@
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1" style="">
             <%= link_to('Profile', profile_path, class: 'dropdown-item') %>
             <%= link_to('My posts', my_posts_url, class: 'dropdown-item') %>
+            <%= link_to('My homes', my_homes_url, class: 'dropdown-item') %>
             <%= link_to('Sign out', destroy_user_session_path, class: 'dropdown-item', method: :delete) %>
           </div>
         </div>

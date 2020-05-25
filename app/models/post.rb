@@ -4,6 +4,7 @@
 #
 #  id          :bigint           not null, primary key
 #  description :string
+#  status      :string           default("active"), not null
 #  title       :string
 #  views       :integer
 #  created_at  :datetime         not null
@@ -13,8 +14,12 @@
 #
 
 class Post < ApplicationRecord
+  include Filterable
+
   belongs_to :user
-  has_one :home
+  belongs_to :home
 
   validates :description, :title, presence: true
+
+  scope :active, -> { where(status: 'active') }
 end

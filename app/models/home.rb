@@ -23,6 +23,10 @@
 #
 
 class Home < ApplicationRecord
+  include Filterable
+
+  has_one_attached :avatar
+
   belongs_to :user
   has_many :posts
 end

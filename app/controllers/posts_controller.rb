@@ -1,38 +1,46 @@
 class PostsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :build_form, only: [:new, :edit]
-  before_action :authenticate_user!, only: [:create]
+  before_action :set_post, only: [:show]
+  before_action :set_user_post, only: %i[edit update destroy]
+  before_action :build_form, only: %i[new]
+  before_action :build_user_form, only: %i[edit]
+  before_action :authenticate_user!, only: %i[create edit update destroy new]
+
+  FILTER_PARAMS = %i[city street house_number index_number floor rooms_count
+                    space build_year furniture fridge tv internet balcony
+                    conditioner].freeze
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.filter(params.slice(*FILTER_PARAMS))
   end
 
   # GET /posts/1
   # GET /posts/1.json
   def show
+    @post.increment!(:views)
   end
+
+  # GET /posts/1/edit
+  def edit; end
 
   # GET /posts/new
   def new
     @post = Post.new
   end
 
-  # GET /posts/1/edit
-  def edit
-  end
-
   # POST /posts
   # POST /posts.json
   def create
-    @post_form = PostForm.new(params.require(:post_form).permit(*(PostForm::HOUSE_FIELDS + PostForm::POST_FIELDS)))
+    @post_form = PostForm.new(
+      params.require(:post_form).permit(*(PostForm::HOUSE_FIELDS + PostForm::POST_FIELDS)).merge(user: current_user)
+    )
 
     respond_to do |format|
       if @post_form.save
-        format.html { redirect_to @post_form, notice: 'Post was successfully created.' }
-        format.json { render :show, status: :created, location: @post_form }
+        format.html { redirect_to posts_url, notice: 'Post was successfully created.' }
+        format.json { render :show, status: :created, location: posts_url }
       else
         format.html { render :new }
         format.json { render json: @post_form.errors, status: :unprocessable_entity }
@@ -56,7 +64,6 @@ class PostsController < ApplicationController
 
   def my_posts
     @posts = Post.where(user: current_user)
-    render 'index'
   end
 
   # DELETE /posts/1
@@ -75,8 +82,20 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
+  def set_user_post
+    @post = Post.where(user: current_user)
+                .find(params[:id])
+  end
+
   def build_form
     @post_form = PostForm.new
+  end
+
+  def build_user_form
+    post = set_post
+    home = post.home
+    params = post.as_json.merge(home.as_json).with_indifferent_access
+    @post_form = PostForm.new(params.slice(*(PostForm::HOUSE_FIELDS | PostForm::POST_FIELDS)))
   end
 
   def post_params

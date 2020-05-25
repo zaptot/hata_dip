@@ -1,11 +1,14 @@
 class HomeController < ApplicationController
-  before_action :set_home, only: [:show, :edit, :update, :destroy]
+  before_action :set_home, only: [:show]
+  before_action :set_user_home, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, only: %i[create edit update destroy new]
 
   PERMITED_PARAMS = %i[city street house_number index_number floor
                        rooms_count space build_year furniture fridge
-                       tv internet balcony conditioner].freeze
-  def show
-  end
+                       tv internet balcony conditioner avatar].freeze
+  def show; end
+
+  def edit; end
 
   def index
     @homes = Home.all
@@ -33,9 +36,6 @@ class HomeController < ApplicationController
     @home = Home.new
   end
 
-  def edit
-  end
-
   def update
     respond_to do |format|
       if @home.update(home_params)
@@ -60,6 +60,11 @@ class HomeController < ApplicationController
 
   def set_home
     @home = Home.find(params[:id])
+  end
+
+  def set_user_home
+    @home = Home.where(user: current_user)
+                .find(params[:id])
   end
 
   def home_params
