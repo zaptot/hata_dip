@@ -1,24 +1,31 @@
-<div class="card mb-4 shadow-sm">
-    <title>Placeholder</title>
-    <% if home.photos.attached? %>
-      <img src="<%= (url_for(home.photos.first)) %>" height="225">
-    <% else %>
-      <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
-        <rect fill="#55595c" width="100%" height="100%"></rect>
-      </svg>
-    <% end %>
-  <div class="card-body">
-    <h5>
-      <%= home.street %>
-    </h5>
-    <p class="card-text">
-      <%= home.city %>
-    </p>
-    <div class="d-flex justify-content-between align-items-center">
-      <small class="text-muted">
-        <%= home.tv %>
-        views
-      </small>
+<div class="card mb-3">
+  <%= link_to '', home, class: 'card-link' %>
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <% if home.photos.attached? %>
+        <%= render(partial: 'carousel', locals: { home: home }) %>
+      <% else %>
+        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
+          <rect fill="#55595c" width="100%" height="100%"></rect>
+        </svg>
+      <% end %>
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title"> <%= home.full_address %></h5>
+        <p class="card-text">
+          <% PostsController::ONLY_TRUE_FILTER_OPTIONS.each do |field| %>
+            <span class="badge badge-pill <%= home.try(field) ? 'badge-success' : 'badge-danger' %>">
+              <%= field.capitalize %>
+            </span>
+          <% end %>
+        </p>
+        <p class="card-text card-date">
+          <small class="text-muted">
+            Last updated <%= time_ago_in_words(home.updated_at) %> ago
+          </small>
+        </p>
+      </div>
     </div>
   </div>
 </div>

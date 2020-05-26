@@ -42,6 +42,10 @@ class Home < ApplicationRecord
   belongs_to :user
   has_many :posts
 
+  def full_address
+    "#{city}, #{street}, #{house_number}/#{index_number}"
+  end
+
   private
 
   def search_by_full_address(full_adress)

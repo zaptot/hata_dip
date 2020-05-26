@@ -17,7 +17,9 @@
       <div class="container">
         <div class="row">
           <% @posts.each do |post| %>
-            <%= link_to render(partial: 'posts/card', locals: { post: post }), post, class: 'col-md-4' %>
+            <div class="col-12">
+              <%= render(partial: 'posts/card', locals: { post: post, home: post.home }) %>
+            </div>
           <% end %>
         </div>
       </div>

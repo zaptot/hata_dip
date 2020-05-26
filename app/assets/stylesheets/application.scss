@@ -59,3 +59,91 @@ a:hover {
   margin-right: 30px;
   padding-left: 40px;
 }
+
+.form-signin {
+  text-align: center;
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+  padding-top: -100px;
+
+  input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+}
+
+.form-center {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.empty-main {
+  height: 100%;
+}
+
+.middle_field {
+  margin-bottom: -1px !important;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.sign-in {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.sign-up {
+  margin-left: -1px;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.home-carousel {
+  margin: auto;
+  max-width: 1000px;
+}
+
+.comforts-card {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 100%;
+  padding: 20px;
+  background-color: coral;
+}
+
+.comfort-point-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 200px;
+  height: 40px;
+  margin: 5px;
+}
+
+.card-link {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 100;
+}
+
+.carousel-control-index {
+  z-index: 200;
+}
+
+.card-date {
+  bottom: 0;
+  padding: 10px;
+  position: absolute;
+}

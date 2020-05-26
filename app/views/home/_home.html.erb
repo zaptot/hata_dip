@@ -1,9 +1,30 @@
+<div class="home-carousel">
+  <% if home.photos.attached? %>
+    <%= render(partial: 'home/carousel', locals: { home: home }) %>
+  <% end %>
+  <div class="comforts-card">
+    <% PostsController::ONLY_TRUE_FILTER_OPTIONS.each do |field| %>
+      <div class="comfort-point-item col-3">
+        <div>
+          <%= field.capitalize %>
+        </div>
+        <div>
+          <span class="badge badge-pill <%= home.try(field) ? 'badge-success' : 'badge-danger' %>">
+            <%= home.try(field) ? '+' : '-' %>
+          </span>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
 <div class="container">
   <div class="row">
     <div class="col-md-10 offset-md-1">
       <table class="table">
         <tbody>
-        <% HomeController::PERMITED_PARAMS.each do |field| %>
+        <% PostsController::HOME_FILTER_PARAMS.each do |field| %>
           <% next unless field.is_a?(Symbol) %>
           <tr>
             <td>

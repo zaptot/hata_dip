@@ -13,7 +13,10 @@
       <div class="container">
         <div class="row">
           <% @homes.each do |home| %>
-            <%= link_to render(partial: 'home/card', locals: { home: home }), home, class: 'col-md-4' %>
+            <div class="col-12">
+              <%= render(partial: 'home/card', locals: { home: home }) %>
+            </div>
+
           <% end %>
         </div>
       </div>

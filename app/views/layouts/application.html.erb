@@ -21,7 +21,7 @@
         <a class="p-2 text-dark" href="/home">homes</a>
       </nav>
 
-      <%= link_to('Sell house', new_post_path, class: 'btn btn-outline-primary')%>
+      <%= link_to('Sell house', new_post_path, class: 'btn btn-outline-success mr-3')%>
       <% if user_signed_in? %>
         <div class="btn-group" role="group">
           <button id="btnGroupDrop1" type="button" class="btn btn-primary rounded-circle profile_icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
@@ -33,8 +33,8 @@
           </div>
         </div>
       <% else %>
-        <%= link_to('Sign in', new_user_session_path, class: 'btn btn-outline-primary')%>
-        <%= link_to('Sign up', new_user_registration_path, class: 'btn btn-outline-primary')%>
+        <%= link_to('Sign in', new_user_session_path, class: 'btn btn-outline-primary sign-in')%>
+        <%= link_to('Sign up', new_user_registration_path, class: 'btn btn-outline-primary sign-up')%>
       <% end %>
     </div>
 
