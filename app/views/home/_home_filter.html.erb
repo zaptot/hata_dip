@@ -1,0 +1,20 @@
+<% PostsController::HOME_FILTER_PARAMS.each do |field| %>
+  <div class="form-group row">
+    <%= label_tag(field, nil, class: "col-form-label col-form-label-sm") %>
+    <%= select(:post, field, Home.pluck(field).uniq, { include_blank: 'select', selected: params[field] }, {:class => "form-control form-control-sm"} ) %>
+  </div>
+<% end %>
+
+<div class="form-group row">
+  Comforts
+  <% PostsController::ONLY_TRUE_FILTER_OPTIONS.each do |field| %>
+    <div class="col-12">
+      <%= check_box(:post, field, { class: 'form-check-label', :checked => params[field].present? }) %>
+      <%= label_tag(field, nil, class: "col-form-label col-form-label-sm") %>
+    </div>
+  <% end %>
+</div>
+
+<div class="actions">
+  <%= submit_tag("search") %>
+</div>

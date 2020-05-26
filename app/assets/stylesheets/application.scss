@@ -12,6 +12,8 @@
  *
  *= require_tree .
  *= require_self
+ *= require select2
+ *= require select2-bootstrap
  */
 
 @import 'bootstrap';
@@ -38,4 +40,22 @@ a:hover {
 .main-slider {
   width: 100%;
   padding-top: 40px;
+}
+
+.main-max-width {
+  background-color: #f8f9fa !important;
+  max-width: 1500px;
+  margin: auto;
+}
+
+.main-posts-page {
+  display: flex;
+}
+
+.filter-main {
+  height: 900px;
+  width: 300px;
+  padding: 20px;
+  margin-right: 30px;
+  padding-left: 40px;
 }

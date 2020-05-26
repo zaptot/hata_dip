@@ -3,15 +3,17 @@ class HomeController < ApplicationController
   before_action :set_user_home, only: [:edit, :update, :destroy]
   before_action :authenticate_user!, only: %i[create edit update destroy new]
 
-  PERMITED_PARAMS = %i[city street house_number index_number floor
+  PERMITED_PARAMS = (%i[city street house_number index_number floor
                        rooms_count space build_year furniture fridge
-                       tv internet balcony conditioner avatar].freeze
+                       tv internet balcony conditioner] + [{ photos: [] }]).freeze
   def show; end
 
   def edit; end
 
   def index
-    @homes = Home.all
+    @params = process_params
+    @params.slice(*PostsController::ONLY_TRUE_FILTER_OPTIONS).each { |k, v| @params.delete(k) if v == '0'}
+    @homes = Home.filter(@params)
   end
 
   def my_homes
@@ -70,5 +72,12 @@ class HomeController < ApplicationController
   def home_params
     params.require(:home)
           .permit(*PERMITED_PARAMS)
+  end
+
+  def process_params
+    params_keys = PostsController::HOME_FILTER_PARAMS |
+                  PostsController::ONLY_TRUE_FILTER_OPTIONS |
+                  PostsController::POST_FILTER_FIELDS
+    params[:post]&.slice(*params_keys) || {}
   end
 end

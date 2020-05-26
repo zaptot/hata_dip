@@ -4,6 +4,7 @@
       <table class="table">
         <tbody>
         <% HomeController::PERMITED_PARAMS.each do |field| %>
+          <% next unless field.is_a?(Symbol) %>
           <tr>
             <td>
               <%= field.capitalize %>

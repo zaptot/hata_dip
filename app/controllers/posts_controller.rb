@@ -7,13 +7,21 @@ class PostsController < ApplicationController
   before_action :build_user_form, only: %i[edit]
   before_action :authenticate_user!, only: %i[create edit update destroy new]
 
-  FILTER_PARAMS = %i[city street house_number index_number floor rooms_count
-                    space build_year furniture fridge tv internet balcony
-                    conditioner].freeze
+  HOME_FILTER_PARAMS = %i[city street floor rooms_count].freeze
+  ONLY_TRUE_FILTER_OPTIONS = %i[furniture fridge tv internet balcony conditioner].freeze
+  POST_FILTER_FIELDS = %i[string].freeze
+
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.filter(params.slice(*FILTER_PARAMS))
+    @params = params[:post]&.slice(*(HOME_FILTER_PARAMS | ONLY_TRUE_FILTER_OPTIONS | POST_FILTER_FIELDS)) || {}
+    @params.slice(*ONLY_TRUE_FILTER_OPTIONS).each { |k, v| @params.delete(k) if v == '0'}
+    homes = Home.filter(@params.slice(*(HOME_FILTER_PARAMS | ONLY_TRUE_FILTER_OPTIONS)))
+    @posts = Post
+    if @params[:string]
+      @posts = @posts.where("description LIKE '%#{@params[:string]}%' OR title LIKE '%#{@params[:string]}%'")
+    end
+    @posts = @posts.joins(:home).merge(homes)
   end
 
   # GET /posts/1
@@ -34,7 +42,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post_form = PostForm.new(
-      params.require(:post_form).permit(*(PostForm::HOUSE_FIELDS + PostForm::POST_FIELDS)).merge(user: current_user)
+      params.require(:post_form).permit(*(PostForm::HOUSE_FIELDS + PostForm::POST_FIELDS + [{photos:[]}])).merge(user: current_user)
     )
 
     respond_to do |format|

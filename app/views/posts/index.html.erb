@@ -4,7 +4,13 @@
   </div>
   <div class="main-posts-page">
     <div class="filter-main">
-      asfdasdf
+      <%= form_tag('/posts', method: :get, validate: true) do %>
+        <div class="form-group row">
+          <%= label_tag(:string, nil, class: "col-form-label col-form-label-sm") %>
+          <%= text_field(:post, :string, {:class => "form-control form-control-sm", value: @params[:string]} ) %>
+        </div>
+        <%= render partial: 'home/home_filter', locals: { params: @params } %>
+      <% end %>
     </div>
 
     <div class="main-slider border-left">

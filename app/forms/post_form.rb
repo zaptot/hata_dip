@@ -2,12 +2,12 @@ class PostForm < BaseForm
   attr_accessor :title, :description, :city, :street, :house_number,
                 :index_number, :floor, :rooms_count, :space, :build_year,
                 :furniture, :fridge, :tv, :internet, :balcony, :conditioner,
-                :home_id, :user, :avatar
+                :home_id, :user, :photos
 
   POST_FIELDS = %i[title description].freeze
   HOUSE_FIELDS = %i[city street house_number index_number floor rooms_count
                     space build_year furniture fridge tv internet balcony
-                    conditioner home_id avatar user].freeze
+                    conditioner home_id user].freeze
 
   validates :title, :description, :city, :street, :house_number, :floor, :index_number, :rooms_count, presence: true,
             if: -> { home_id.nil? }
@@ -18,7 +18,6 @@ class PostForm < BaseForm
 
   def persist!
     home = find_or_initialize_home
-    binding.pry
     home.save!
 
     Post.new(title: title, description: description, home: home, user: user).save!

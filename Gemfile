@@ -26,6 +26,8 @@ gem 'jbuilder', '~> 2.7'
 gem 'devise'
 gem 'annotate'
 gem 'client_side_validations'
+gem 'select2-rails'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootstrap', '~> 4.4.1'
 gem 'jquery-rails'

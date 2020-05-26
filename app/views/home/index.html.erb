@@ -1,10 +1,22 @@
-<div class="album py-5 bg-light">
-  <div class="container">
+<div class="main-max-width">
+  <div style="padding: 20px 0 10px 20px;" class="border-bottom">
     <h1>Homes</h1>
-    <div class="row">
-      <% @homes.each do |home| %>
-        <%= link_to render(partial: 'home/card', locals: { home: home }), home, class: 'col-md-4' %>
+  </div>
+  <div class="main-posts-page">
+    <div class="filter-main">
+      <%= form_tag('/home', method: :get, validate: true) do %>
+        <%= render partial: 'home/home_filter', locals: { params: @params } %>
       <% end %>
+    </div>
+
+    <div class="main-slider border-left">
+      <div class="container">
+        <div class="row">
+          <% @homes.each do |home| %>
+            <%= link_to render(partial: 'home/card', locals: { home: home }), home, class: 'col-md-4' %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>

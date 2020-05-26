@@ -1,7 +1,7 @@
 <div class="card mb-4 shadow-sm">
     <title>Placeholder</title>
-    <% if home.avatar.attached? %>
-      <img src="<%= (url_for(home.avatar)) %>" height="225">
+    <% if home.photos.attached? %>
+      <img src="<%= (url_for(home.photos.first)) %>" height="225">
     <% else %>
       <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
         <rect fill="#55595c" width="100%" height="100%"></rect>
