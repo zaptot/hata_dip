@@ -1,18 +1,26 @@
-<p>
-  <strong>Title:</strong>
+<h2 class="post-show">
   <%= @post.title %>
-</p>
+  <div class="title-badge">
+    <span>
+      Views: <%= @post.views %>
+    </span>
+  </div>
+</h2>
 
-<p>
-  <strong>Description:</strong>
-  <%= @post.description %>
-</p>
+<div class="show-post-price">
+  <%= @post.price.to_i %>$
+</div>
+<div class="btn-group dropleft show-post-contacts">
+  <button type="button" class="btn btn-success" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <%= fa_icon "phone", class: "fa-2x" %>
+  </button>
+  <div class="dropdown-menu" x-placement="left-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-200px, 0px, 0px); padding: 10px 0 10px 10px;">
+    <p><strong>Email</strong> <%= @post.user.email %></p>
+  </div>
+</div>
 
-<p>
-  <strong>Views:</strong>
-  <%= @post.views %>
-</p>
-
-<%= render partial: 'home/home', home: @post.home, locals: { home: @post.home } %>
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= render layout: 'home/home', home: @post.home, locals: { home: @post.home } do %>
+  <p class="post-show">
+    <%= @post.description %>
+  </p>
+<% end %>

@@ -13,11 +13,11 @@ class HomeController < ApplicationController
   def index
     @params = process_params
     @params.slice(*PostsController::ONLY_TRUE_FILTER_OPTIONS).each { |k, v| @params.delete(k) if v == '0'}
-    @homes = Home.filter(@params)
+    @homes = Home.filter(@params).paginate(page: params[:page], per_page: 15)
   end
 
   def my_homes
-    @homes = Home.where(user: current_user)
+    @homes = index.where(user: current_user)
   end
 
   def create

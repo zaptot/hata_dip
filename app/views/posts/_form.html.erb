@@ -1,24 +1,19 @@
 <%= form_for(@post_form, url: '/posts', method: :post, validate: true) do |form| %>
-  <% if @post_form.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@post_form.errors.count, "error") %> prohibited this post from being saved:</h2>
-
-      <ul>
-        <% @post_form.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+  <div class="w-300 pad-1-25">
+    <div class="field">
+      <%= form.label :title %>
+      <%= form.text_field :title, class: 'form-control' %>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
+    <div class="field">
+      <%= form.label :description %>
+      <%= form.text_field :description, class: 'form-control' %>
+    </div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_field :description %>
+    <div class="field">
+      <%= form.label :price %>
+      <%= form.text_field :price, class: 'form-control' %>
+    </div>
   </div>
 
   <div class="accordion" id="accordionExample">
@@ -33,10 +28,14 @@
 
       <div id="collapseOne" class="collapse <%= current_user.homes.any? ? 'show' : '' %>" aria-labelledby="headingOne" data-parent="#accordionExample">
         <div class="card-body">
-          <% current_user.homes.each do |home| %>
+          <div class="field">
+            <%= form.radio_button :home_id, false %>
+            <%= form.label 'Create new home' %>
+          </div>
+          <% current_user.homes.uniq.each do |home| %>
             <div class="field">
-              <%= form.label home.id %>
               <%= form.radio_button :home_id, home.id %>
+              <%= form.label home.full_address %>
             </div>
           <% end %>
         </div>
@@ -51,80 +50,24 @@
         </h5>
       </div>
       <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-        <div class="card-body">
-          <div class="field">
-            <%= form.label :city %>
-            <%= form.text_field :city %>
-          </div>
+        <div class="card-body w-300">
+          <% (PostForm::HOUSE_FIELDS - %i[home_id user] - PostsController::ONLY_TRUE_FILTER_OPTIONS).each do |field|%>
+            <div class="field">
+              <%= form.label field %>
+              <%= form.text_field field, class: 'form-control' %>
+            </div>
+          <% end %>
 
-          <div class="field">
-            <%= form.label :street %>
-            <%= form.text_field :street %>
-          </div>
+          <% PostsController::ONLY_TRUE_FILTER_OPTIONS.each do |field|%>
+            <div class="field">
+              <%= form.label field %>
+              <%= form.check_box field %>
+            </div>
+          <% end %>
 
-          <div class="field">
-            <%= form.label :house_number %>
-            <%= form.text_field :house_number %>
-          </div>
-
-          <div class="field">
-            <%= form.label :index_number %>
-            <%= form.text_field :index_number %>
-          </div>
-
-          <div class="field">
-            <%= form.label :floor %>
-            <%= form.text_field :floor %>
-          </div>
-
-          <div class="field">
-            <%= form.label :rooms_count %>
-            <%= form.text_field :rooms_count %>
-          </div>
-
-          <div class="field">
-            <%= form.label :space %>
-            <%= form.text_field :space %>
-          </div>
-
-          <div class="field">
-            <%= form.label :build_year %>
-            <%= form.text_field :build_year %>
-          </div>
-
-          <div class="field">
-            <%= form.label :furniture %>
-            <%= form.check_box :furniture %>
-          </div>
-
-          <div class="field">
-            <%= form.label :fridge %>
-            <%= form.check_box :fridge %>
-          </div>
-
-          <div class="field">
-            <%= form.label :tv %>
-            <%= form.check_box :tv %>
-          </div>
-
-          <div class="field">
-            <%= form.label :internet %>
-            <%= form.check_box :internet %>
-          </div>
-
-          <div class="field">
-            <%= form.label :balcony %>
-            <%= form.check_box :balcony %>
-          </div>
-
-          <div class="field">
-            <%= form.label :conditioner %>
-            <%= form.check_box :conditioner %>
-          </div>
-
-          <div>
-            <%= form.label :photos %>
-            <%= form.file_field :photos, multiple: true %>
+          <div class="custom-file">
+            <%= form.file_field :photos, multiple: true, class: 'custom-file-input' %>
+            <%= form.label :photos, 'Choose Files', class: 'custom-file-label' %>
           </div>
         </div>
       </div>
@@ -132,6 +75,6 @@
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: 'btn btn-primary m-3'%>
   </div>
 <% end %>

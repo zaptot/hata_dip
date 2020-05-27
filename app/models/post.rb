@@ -4,6 +4,7 @@
 #
 #  id          :bigint           not null, primary key
 #  description :string
+#  price       :decimal(, )
 #  status      :string           default("active"), not null
 #  title       :string
 #  views       :integer

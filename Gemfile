@@ -27,6 +27,8 @@ gem 'devise'
 gem 'annotate'
 gem 'client_side_validations'
 gem 'select2-rails'
+gem 'font-awesome-rails'
+gem 'will_paginate-bootstrap'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootstrap', '~> 4.4.1'

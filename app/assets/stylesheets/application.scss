@@ -17,6 +17,7 @@
  */
 
 @import 'bootstrap';
+@import 'font-awesome';
 
 .profile_icon {
   width: 45px;
@@ -39,7 +40,6 @@ a:hover {
 
 .main-slider {
   width: 100%;
-  padding-top: 40px;
 }
 
 .main-max-width {
@@ -119,7 +119,7 @@ a:hover {
   justify-content: space-around;
   width: 100%;
   padding: 20px;
-  background-color: coral;
+  background-color: lightgray;
 }
 
 .comfort-point-item {
@@ -146,4 +146,155 @@ a:hover {
   bottom: 0;
   padding: 10px;
   position: absolute;
+}
+
+.card-price {
+  display: flex;
+  justify-content: space-between;
+}
+
+.title-badge {
+  font-size: 15px;
+  color: gray;
+}
+
+.post-show {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
+}
+
+.show-post-price {
+  color: white;
+  margin-top: -60px;
+  font-size: 26px;
+  position: fixed;
+  right: 0;
+  padding: 15px;
+  background-color: #28a745;
+  z-index: 100;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.show-post-contacts {
+  font-size: 26px;
+  margin-top: 20px;
+  position: fixed;
+  right: 0;
+  z-index: 100;
+
+  button {
+    width: 65px;
+    height: 54px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+}
+
+.w-300 {
+  width: 300px;
+}
+
+.pad-1-25 {
+  padding: 1.25rem;
+}
+
+.footer-line {
+  border-top: 1px solid lightgray;
+}
+
+.form-signin {
+  margin-top: 50px;
+}
+
+.remember-check {
+  text-align: left;
+}
+
+.login-forgot {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.form-signin {
+  background-color: #eeeeee;
+  padding: 30px;
+  border-radius: 30px;
+}
+
+.index-sorters {
+  display: flex;
+  align-content: end;
+  justify-content: flex-end;
+  padding: 20px 0 20px 20px;
+}
+
+.w-px-150 {
+  width: 150px;
+}
+
+.show-borders {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
+  background-color: #eee;
+  margin-bottom: 96px;
+  font-size: 20px;
+}
+
+.check-mark {
+  font-size: 32px;
+  color: #68b300;
+}
+
+.check-cross {
+  font-size: 32px;
+  color: #dc3545;
+}
+
+.pagination {
+  justify-content: center;
+}
+
+.pagination-nav {
+  ul {
+    .prev {
+      a, span {
+        border-top-left-radius: .25rem;
+        border-bottom-left-radius: .25rem;
+      }
+    }
+
+    .next {
+      a, span {
+        border-top-right-radius: .25rem;
+        border-bottom-right-radius: .25rem;
+      }
+    }
+
+    .active {
+      span {
+        z-index: 1;
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+      }
+    }
+    li {
+      a, span {
+        position: relative;
+        display: block;
+        padding: .5rem .75rem;
+        margin-left: -1px;
+        line-height: 1.25;
+        color: #007bff;
+        background-color: #fff;
+        border: 1px solid #dee2e6;
+      }
+    }
+  }
 }

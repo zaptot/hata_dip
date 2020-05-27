@@ -11,26 +11,32 @@
       <% end %>
     </div>
     <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title"> <%= post.title %></h5>
-        <p class="card-text">
-          <%= home.full_address %>
-        </p>
-        <p class="card-text">
-          <%= post.description %>
-        </p>
-        <p class="card-text">
-          <% PostsController::ONLY_TRUE_FILTER_OPTIONS.each do |field| %>
-            <span class="badge badge-pill <%= home.try(field) ? 'badge-success' : 'badge-danger' %>">
+      <div class="card-body card-price">
+        <div>
+          <h5 class="card-title"> <%= post.title %></h5>
+          <p class="card-text">
+            <%= home.full_address %>
+          </p>
+          <p class="card-text">
+            <%= post.description %>
+          </p>
+          <p class="card-text">
+            <% PostsController::ONLY_TRUE_FILTER_OPTIONS.each do |field| %>
+              <% next unless home.try(field) %>
+            <span class="badge badge-pill badge-success">
               <%= field.capitalize %>
             </span>
-          <% end %>
-        </p>
-        <p class="card-text card-date">
-          <small class="text-muted">
-            Last updated <%= time_ago_in_words(home.updated_at) %> ago
-          </small>
-        </p>
+            <% end %>
+          </p>
+          <p class="card-text card-date">
+            <small class="text-muted">
+              Last updated <%= time_ago_in_words(home.updated_at) %> ago
+            </small>
+          </p>
+        </div>
+        <div>
+          <%= post.price.to_i %> $
+        </div>
       </div>
     </div>
   </div>

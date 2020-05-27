@@ -1,14 +1,37 @@
-<div class="album py-5 bg-light">
-  <div class="container">
-    <div class="list-title">
-      <h1>My posts</h1>
-      <a type="button" class="btn btn-success" href="/posts/new">Add Post</a>
+<div class="main-max-width">
+  <div style="padding: 20px 0 10px 20px;" class="border-bottom">
+    <h1>My posts</h1>
+  </div>
+  <div class="main-posts-page">
+    <div class="filter-main">
+      <%= form_tag('/posts', method: :get, validate: true) do %>
+        <div class="form-group row">
+          <%= label_tag(:string, nil, class: "col-form-label col-form-label-sm") %>
+          <%= text_field(:post, :string, {:class => "form-control form-control-sm", value: @params[:string]} ) %>
+        </div>
+        <%= render partial: 'home/home_filter', locals: { params: @params } %>
+      <% end %>
     </div>
 
-    <div class="row">
-      <% @posts.each do |post| %>
-        <%= link_to render(partial: 'posts/card', locals: { post: post }), post, class: 'col-md-4' %>
-      <% end %>
+    <div class="main-slider border-left">
+      <div class="container">
+        <div class="index-sorters">
+          <select class="form-control form-control-sm w-px-150" name="post[city]" id="post_city"><option value="">Sort</option>
+            <option value="cheap first">cheap first</option>
+            <option value="expensive first">expensive first</option>
+          </select>
+        </div>
+        <div class="row">
+          <% @posts.each do |post| %>
+            <div class="col-12">
+              <%= render(partial: 'posts/card', locals: { post: post, home: post.home }) %>
+            </div>
+          <% end %>
+        </div>
+        <nav class="pagination-nav">
+          <%= will_paginate @homes, renderer: BootstrapPagination::Rails, previous_label: 'Previous', next_label: 'Next' %>
+        </nav>
+      </div>
     </div>
   </div>
 </div>

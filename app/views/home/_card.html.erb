@@ -15,7 +15,8 @@
         <h5 class="card-title"> <%= home.full_address %></h5>
         <p class="card-text">
           <% PostsController::ONLY_TRUE_FILTER_OPTIONS.each do |field| %>
-            <span class="badge badge-pill <%= home.try(field) ? 'badge-success' : 'badge-danger' %>">
+            <% next unless home.try(field) %>
+            <span class="badge badge-pill badge-success">
               <%= field.capitalize %>
             </span>
           <% end %>

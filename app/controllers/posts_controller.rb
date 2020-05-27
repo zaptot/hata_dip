@@ -17,7 +17,7 @@ class PostsController < ApplicationController
     @params = params[:post]&.slice(*(HOME_FILTER_PARAMS | ONLY_TRUE_FILTER_OPTIONS | POST_FILTER_FIELDS)) || {}
     @params.slice(*ONLY_TRUE_FILTER_OPTIONS).each { |k, v| @params.delete(k) if v == '0'}
     homes = Home.filter(@params.slice(*(HOME_FILTER_PARAMS | ONLY_TRUE_FILTER_OPTIONS)))
-    @posts = Post
+    @posts ||= Post.paginate(page: params[:page], per_page: 15)
     if @params[:string]
       @posts = @posts.where("description LIKE '%#{@params[:string]}%' OR title LIKE '%#{@params[:string]}%'")
     end
@@ -71,7 +71,7 @@ class PostsController < ApplicationController
   end
 
   def my_posts
-    @posts = Post.where(user: current_user)
+    index.where(user: current_user)
   end
 
   # DELETE /posts/1

@@ -1,7 +1,7 @@
 <% PostsController::HOME_FILTER_PARAMS.each do |field| %>
   <div class="form-group row">
     <%= label_tag(field, nil, class: "col-form-label col-form-label-sm") %>
-    <%= select(:post, field, Home.pluck(field).uniq, { include_blank: 'select', selected: params[field] }, {:class => "form-control form-control-sm"} ) %>
+    <%= select(:post, field, Home.pluck(field).uniq, { include_blank: 'Select', selected: params[field] }, {:class => "form-control form-control-sm"} ) %>
   </div>
 <% end %>
 
@@ -15,6 +15,6 @@
   <% end %>
 </div>
 
-<div class="actions">
-  <%= submit_tag("search") %>
+<div class="actions row">
+  <%= submit_tag("search", class: 'btn btn-primary') %>
 </div>

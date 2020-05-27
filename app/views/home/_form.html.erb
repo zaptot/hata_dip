@@ -1,78 +1,24 @@
-<div class="field">
-  <%= form.label :city %>
-  <%= form.text_field :city %>
-</div>
+<div class="card-body w-300">
+  <% (PostForm::HOUSE_FIELDS - %i[home_id user] - PostsController::ONLY_TRUE_FILTER_OPTIONS).each do |field|%>
+    <div class="field">
+      <%= form.label field %>
+      <%= form.text_field field, class: 'form-control' %>
+    </div>
+  <% end %>
 
-<div class="field">
-  <%= form.label :street %>
-  <%= form.text_field :street %>
-</div>
+  <% PostsController::ONLY_TRUE_FILTER_OPTIONS.each do |field|%>
+    <div class="field">
+      <%= form.label field %>
+      <%= form.check_box field %>
+    </div>
+  <% end %>
 
-<div class="field">
-  <%= form.label :house_number %>
-  <%= form.text_field :house_number %>
-</div>
-
-<div class="field">
-  <%= form.label :index_number %>
-  <%= form.text_field :index_number %>
-</div>
-
-<div class="field">
-  <%= form.label :floor %>
-  <%= form.text_field :floor %>
-</div>
-
-<div class="field">
-  <%= form.label :rooms_count %>
-  <%= form.text_field :rooms_count %>
-</div>
-
-<div class="field">
-  <%= form.label :space %>
-  <%= form.text_field :space %>
-</div>
-
-<div class="field">
-  <%= form.label :build_year %>
-  <%= form.text_field :build_year %>
-</div>
-
-<div class="field">
-  <%= form.label :furniture %>
-  <%= form.check_box :furniture %>
-</div>
-
-<div class="field">
-  <%= form.label :fridge %>
-  <%= form.check_box :fridge %>
-</div>
-
-<div class="field">
-  <%= form.label :tv %>
-  <%= form.check_box :tv %>
-</div>
-
-<div class="field">
-  <%= form.label :internet %>
-  <%= form.check_box :internet %>
-</div>
-
-<div class="field">
-  <%= form.label :balcony %>
-  <%= form.check_box :balcony %>
-</div>
-
-<div class="field">
-  <%= form.label :conditioner %>
-  <%= form.check_box :conditioner %>
-</div>
-
-<div>
-  <%= form.label :photos %>
-  <%= form.file_field :photos, multiple: true %>
+  <div class="custom-file">
+    <%= form.file_field :photos, multiple: true, class: 'custom-file-input' %>
+    <%= form.label :photos, 'Choose Files', class: 'custom-file-label' %>
+  </div>
 </div>
 
 <div class="actions">
-  <%= form.submit %>
+  <%= form.submit class: 'btn btn-primary m-3'%>
 </div>

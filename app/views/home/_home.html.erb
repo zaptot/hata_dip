@@ -1,42 +1,44 @@
-<div class="home-carousel">
-  <% if home.photos.attached? %>
-    <%= render(partial: 'home/carousel', locals: { home: home }) %>
-  <% end %>
-  <div class="comforts-card">
-    <% PostsController::ONLY_TRUE_FILTER_OPTIONS.each do |field| %>
-      <div class="comfort-point-item col-3">
-        <div>
-          <%= field.capitalize %>
-        </div>
-        <div>
-          <span class="badge badge-pill <%= home.try(field) ? 'badge-success' : 'badge-danger' %>">
-            <%= home.try(field) ? '+' : '-' %>
+<div class="show-borders">
+  <div class="home-carousel">
+    <% if home.photos.attached? %>
+      <%= render(partial: 'home/carousel', locals: { home: home }) %>
+    <% end %>
+    <div class="comforts-card">
+      <% PostsController::ONLY_TRUE_FILTER_OPTIONS.each do |field| %>
+        <div class="col-4">
+          <span>
+            <%= fa_icon "check", class: 'check-mark' if home.try(field) %>
+            <%= fa_icon "times-circle", class: 'check-cross' unless home.try(field) %>
+          </span>
+          <span>
+            <%= field.capitalize %>
           </span>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
-</div>
 
+  <%= yield %>
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-10 offset-md-1">
-      <table class="table">
-        <tbody>
-        <% PostsController::HOME_FILTER_PARAMS.each do |field| %>
-          <% next unless field.is_a?(Symbol) %>
-          <tr>
-            <td>
-              <%= field.capitalize %>
-            </td>
-            <td>
-              <%= home.try(field) %>
-            </td>
-          </tr>
-        <% end %>
-        </tbody>
-      </table>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 offset-md-1">
+        <table class="table">
+          <tbody>
+          <% PostsController::HOME_FILTER_PARAMS.each do |field| %>
+            <% next unless field.is_a?(Symbol) %>
+            <tr>
+              <td>
+                <%= field.capitalize %>
+              </td>
+              <td>
+                <%= home.try(field) %>
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>

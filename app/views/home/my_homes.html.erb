@@ -1,14 +1,33 @@
-<div class="album py-5 bg-light">
-  <div class="container">
-    <div class="list-title">
-      <h1>My homes</h1>
-      <a type="button" class="btn btn-success" href="/home/new">Add Home</a>
+<div class="main-max-width">
+  <div style="padding: 20px 0 10px 20px;" class="border-bottom">
+    <h1>My homes</h1>
+  </div>
+  <div class="main-posts-page">
+    <div class="filter-main">
+      <%= form_tag('/home', method: :get, validate: true) do %>
+        <%= render partial: 'home/home_filter', locals: { params: @params } %>
+      <% end %>
     </div>
 
-    <div class="row">
-      <% @homes.each do |home| %>
-        <%= link_to render(partial: 'home/card', locals: { home: home }), home, class: 'col-md-4' %>
-      <% end %>
+    <div class="main-slider border-left">
+      <div class="container">
+        <div class="index-sorters">
+          <select class="form-control form-control-sm w-px-150" name="post[city]" id="post_city"><option value="">Sort</option>
+            <option value="cheap first">cheap first</option>
+            <option value="expensive first">expensive first</option>
+          </select>
+        </div>
+        <div class="row">
+          <% @homes.each do |home| %>
+            <div class="col-12">
+              <%= render(partial: 'home/card', locals: { home: home }) %>
+            </div>
+          <% end %>
+        </div>
+        <nav class="pagination-nav">
+          <%= will_paginate @homes, renderer: BootstrapPagination::Rails, previous_label: 'Previous', next_label: 'Next' %>
+        </nav>
+      </div>
     </div>
   </div>
 </div>

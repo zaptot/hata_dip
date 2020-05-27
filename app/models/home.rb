@@ -42,6 +42,9 @@ class Home < ApplicationRecord
   belongs_to :user
   has_many :posts
 
+  validates :city, :street, :house_number, :floor, :index_number, :rooms_count, presence: true
+  validates :house_number, :floor, :index_number, :rooms_count, numericality: { only_integer: true }
+
   def full_address
     "#{city}, #{street}, #{house_number}/#{index_number}"
   end

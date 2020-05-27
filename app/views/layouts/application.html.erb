@@ -11,14 +11,15 @@
 
   <body class="d-flex flex-column h-100">
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 bg-white border-bottom shadow-sm">
+      <%= fa_icon "home", class: 'fa-2x pr-2' %>
       <%= link_to('HATA.BY', root_path, class: 'my-0 mr-md-auto font-weight-normal') %>
 
       <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-dark" href="/posts">posts</a>
+        <a class="p-2 text-dark" href="/posts">Posts</a>
       </nav>
 
       <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-dark" href="/home">homes</a>
+        <a class="p-2 text-dark" href="/home">Homes</a>
       </nav>
 
       <%= link_to('Sell house', new_post_path, class: 'btn btn-outline-success mr-3')%>
@@ -42,9 +43,9 @@
       <%= yield %>
     </main>
 
-    <footer class="footer mt-auto py-3">
+    <footer class="footer mt-auto py-3 footer-line">
       <div class="container">
-        <span class="text-muted">Place sticky footer content here.</span>
+        <span class="text-muted">BSU diploma 2020</span>
       </div>
     </footer>
   </body>
