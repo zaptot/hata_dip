@@ -81,3 +81,5 @@ class HomeController < ApplicationController
     params[:post]&.slice(*params_keys) || {}
   end
 end
+
+
