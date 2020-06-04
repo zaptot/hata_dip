@@ -42,7 +42,9 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post_form = PostForm.new(
-      params.require(:post_form).permit(*(PostForm::HOUSE_FIELDS + PostForm::POST_FIELDS + [{photos:[]}])).merge(user: current_user)
+      params.require(:post_form)
+            .permit(*(PostForm::HOUSE_FIELDS + PostForm::POST_FIELDS + [{photos:[]}]))
+            .merge(user: current_user)
     )
 
     respond_to do |format|

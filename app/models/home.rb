@@ -27,7 +27,6 @@ class Home < ApplicationRecord
 
   scope :filter_by_city, ->(city) { where(city: city) }
   scope :filter_by_street, ->(street) { where(street: street) }
-  # scope :filter_by_build_year, ->(build_year) { where(city: build_year) }
   scope :filter_by_rooms_count, ->(rooms_count) { where(rooms_count: rooms_count) }
   scope :filter_by_floor, ->(floor) { where(floor: floor) }
   scope :filter_by_fridge, ->(fridge) { where(fridge: fridge) }
@@ -38,7 +37,6 @@ class Home < ApplicationRecord
   scope :filter_by_tv, ->(tv) { where(tv: tv) }
 
   has_many_attached :photos
-
   belongs_to :user
   has_many :posts
 
@@ -47,14 +45,5 @@ class Home < ApplicationRecord
 
   def full_address
     "#{city}, #{street}, #{house_number}/#{index_number}"
-  end
-
-  private
-
-  def search_by_full_address(full_adress)
-    {
-      house_number: full_adress.split('/').first,
-      index_number: full_adress.split('/').last
-    }
   end
 end

@@ -12,7 +12,9 @@ class HomeController < ApplicationController
 
   def index
     @params = process_params
-    @params.slice(*PostsController::ONLY_TRUE_FILTER_OPTIONS).each { |k, v| @params.delete(k) if v == '0'}
+    @params.slice(*PostsController::ONLY_TRUE_FILTER_OPTIONS).each do |k, v|
+      @params.delete(k) if v == '0'
+    end
     @homes = Home.filter(@params).paginate(page: params[:page], per_page: 15)
   end
 
